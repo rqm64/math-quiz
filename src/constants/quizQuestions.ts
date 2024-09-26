@@ -1,11 +1,6 @@
-export interface IQuestion {
-    id: string;
-    question: string;
-    answer: string;
-    options: string[];
-}
+import { IQuestion } from "../types";
 
-export const DATA: IQuestion[] = [
+export const QUIZ_QUESTIONS: IQuestion[] = [
     {
         id: '001',
         question: 'How match is 1 + 1?',
@@ -24,4 +19,4 @@ export const DATA: IQuestion[] = [
         answer: '6',
         options: ['1', '2', '6', '100'],
     },
-]
+];

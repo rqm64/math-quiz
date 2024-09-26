@@ -1,13 +1,9 @@
-import { IQuestion } from "../DATA";
+import { IQuestion, TAnswer } from "../types";
 
-export const calculateQuizGrade = (answers: Array<string | null>, questions: IQuestion[]) => {
-    let correctAnswers = 0;
-    answers.forEach((item, index) => {
-        if (item && item === questions[index].answer) {
-            correctAnswers++;
-        }
-
-    });
+export const calculateQuizGrade = (answers: TAnswer[], questions: IQuestion[]) => {
+    const correctAnswers = answers.reduce((acc, answer, index) => (
+        answer === questions[index].answer ? acc + 1 : acc
+    ), 0);
 
     const grade = (correctAnswers / questions.length) * 100;
 

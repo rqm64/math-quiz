@@ -1,5 +1,5 @@
-import { FC, useState } from "react";
-import { IQuestion } from "../DATA";
+import { FC, useCallback, useState } from "react";
+import { IQuestion, TAnswer } from "../types";
 import { QuizResultStep } from "./QuizResultStep";
 import { QuizQuestionStep } from "./QuizQuestionStep";
 import { calculateQuizGrade } from "./QuizUtils";
@@ -10,16 +10,16 @@ interface IQuizProps {
 
 export const Quiz: FC<IQuizProps> = ({ data }) => {
     const [step, setStep] = useState(0);
-    const [answers, setAnswers] = useState<Array<string | null>>(new Array(data.length).fill(null));
+    const [answers, setAnswers] = useState<TAnswer[]>(new Array(data.length).fill(null));
     const isFinished = step === data.length;
 
-    const handleNextStep = () => {
-        setStep(step + 1);
-    };
+    const handleNextStep = useCallback(() => {
+        setStep(n => n + 1);
+    }, []);
 
-    const handlePrevStep = () => {
-        setStep(step - 1);
-    };
+    const handlePrevStep = useCallback(() => {
+        setStep(n => n - 1);
+    }, []);
 
     const handleChangeAnswer = (value: string) => {
         const nextAnswers = [...answers];

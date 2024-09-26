@@ -1,10 +1,18 @@
 import { Box, Button, Dialog, Typography } from "@mui/material";
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { Quiz } from "./quiz/Quiz";
-import { DATA } from "./DATA";
+import { QUIZ_QUESTIONS } from "./constants/quizQuestions";
 
 export const App = () => {
     const [isOpenModal, setIsOpenModal] = useState(false);
+
+    const handleOpenModal = useCallback(() => {
+        setIsOpenModal(true)
+    }, []);
+
+    const handleCloseModal = useCallback(() => {
+        setIsOpenModal(false)
+    }, []);
 
     return (
         <Box
@@ -19,14 +27,14 @@ export const App = () => {
                 Math Quiz
             </Typography>
 
-            <Button variant="contained" onClick={() => setIsOpenModal(true)}>Start</Button>
+            <Button variant="contained" onClick={handleOpenModal}>Start</Button>
 
             <Dialog
                 open={isOpenModal}
-                onClose={() => setIsOpenModal(false)}
+                onClose={handleCloseModal}
                 fullWidth
             >
-                <Quiz data={DATA} />
+                <Quiz data={QUIZ_QUESTIONS} />
             </Dialog>
         </Box>
     );

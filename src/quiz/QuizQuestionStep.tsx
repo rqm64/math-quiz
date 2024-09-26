@@ -1,6 +1,6 @@
 import { Button, DialogActions, DialogContent, DialogTitle, FormControlLabel, Radio, RadioGroup } from "@mui/material";
-import { FC } from "react";
-import { IQuestion } from "../DATA";
+import { FC, useCallback } from "react";
+import { IQuestion } from "../types";
 
 interface IProps {
     data: IQuestion;
@@ -12,10 +12,12 @@ interface IProps {
     onNextStep: () => void;
 }
 
-export const QuizQuestionStep: FC<IProps> = ({ data, value, onChange, onPrevStep, onNextStep, isDisabledPrev, isAvailableDone }) => {
-    const handleChange = (_: unknown, value: string) => {
+export const QuizQuestionStep: FC<IProps> = (props) => {
+    const { data, value, isAvailableDone, isDisabledPrev, onChange, onPrevStep, onNextStep } = props;
+
+    const handleChange = useCallback((_: unknown, value: string) => {
         onChange(value);
-    };
+    }, [onChange]);
 
     return (
         <>
@@ -23,7 +25,12 @@ export const QuizQuestionStep: FC<IProps> = ({ data, value, onChange, onPrevStep
             <DialogContent>
                 <RadioGroup value={value} onChange={handleChange}>
                     {data.options.map((item, index) => (
-                        <FormControlLabel key={index} value={item} label={item} control={<Radio />} />
+                        <FormControlLabel
+                            key={index}
+                            value={item}
+                            label={item}
+                            control={<Radio />}
+                        />
                     ))}
                 </RadioGroup>
             </DialogContent>
