@@ -23,7 +23,7 @@ export const QuizQuestionStep: FC<IProps> = ({ data, value, onChange, onPrevStep
             <DialogContent>
                 <RadioGroup value={value} onChange={handleChange}>
                     {data.options.map((item, index) => (
-                        <FormControlLabel key={index} value={item} label={item} control={<Radio />}/>
+                        <FormControlLabel key={index} value={item} label={item} control={<Radio />} />
                     ))}
                 </RadioGroup>
             </DialogContent>

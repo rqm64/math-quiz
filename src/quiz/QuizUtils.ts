@@ -6,10 +6,10 @@ export const calculateQuizGrade = (answers: Array<string | null>, questions: IQu
         if (item && item === questions[index].answer) {
             correctAnswers++;
         }
-        
+
     });
 
     const grade = (correctAnswers / questions.length) * 100;
-  
+
     return Math.round(grade).toString();
 };
